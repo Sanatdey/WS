@@ -1,11 +1,12 @@
 var express = require('express');
 var app = express();
 const port = process.env.PORT || 8080;
+const webPort = process.env.PORT || 3000;
 const WebSocket = require('ws');
 const server = require('http').createServer(app);
 // const wss = new WebSocket.Server({ server });
 const wss = new WebSocket.Server({
-    port: 3000,
+    port: webPort,
     perMessageDeflate: {
       zlibDeflateOptions: {
         // See zlib defaults.
@@ -26,7 +27,7 @@ const wss = new WebSocket.Server({
       // should not be compressed.
     }
   });
-console.log(server);
+// console.log(server);
 wss.on('connection', function connection(ws) {
     console.log('New Client Joined');
     ws.send('Client Connected');
@@ -47,5 +48,6 @@ app.get('/',  (req, res) => {
   res.send('Hello World!');
 });
 app.listen(port,  () => {
-  console.log('Example app listening on port 3000!');
+  console.log('Example app listening on port '+port);
+    console.log('Websocket port '+port);
 });
