@@ -1,12 +1,11 @@
-var express = require('express');
-var app = express();
+// var express = require('express');
+// var app = express();
 const port = process.env.PORT || 8080;
-const webPort = process.env.PORT || 3000;
 const WebSocket = require('ws');
-const server = require('http').createServer(app);
+// const server = require('http').createServer(app);
 // const wss = new WebSocket.Server({ server });
 const wss = new WebSocket.Server({
-    port: webPort,
+    port: port,
     perMessageDeflate: {
       zlibDeflateOptions: {
         // See zlib defaults.
@@ -44,10 +43,10 @@ wss.on('connection', function connection(ws) {
     
 });
 
-app.get('/',  (req, res) => {
-  res.send('Hello World!');
-});
-app.listen(port,  () => {
-  console.log('Example app listening on port '+port);
-    console.log('Websocket port '+webPort);
-});
+// app.get('/',  (req, res) => {
+//   res.send('Hello World!');
+// });
+// app.listen(port,  () => {
+//   console.log('Example app listening on port 3000!');
+// });
+console.log("WS port : "+port);
